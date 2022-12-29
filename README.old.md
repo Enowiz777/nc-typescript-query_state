@@ -132,3 +132,51 @@ color:${(props) => props.theme.textColor}
 
 # 5.2 Home pt.1
 
+20221227 - doing the style
+- The screen is going to be recorded. 
+
+# 5.3 Home pt.2
+
+- fetch data from API
+- first make interface of data. 
+- typescript needs to know what is coming from API
+- put the coins on the state.
+
+- useEffect: choose to run code, start, end, or everytime that page renders. 
+	- If you surround with async, it will run immediately.
+
+- API gets loaded everytime you refresh the page. 
+- If you go into the link to a different page, the user needs to go back and re-fetch everything. This is not efficient. 
+
+# 5.4 Route States 
+
+- Use Crypto Icon to get icons from the website.
+- Retrieve Coin data from CoinPaprika.
+- We have the information about the coin. We have the name. After the loading, we are going to get the data again and it will show loading. You can send data between the screen behind the scene. 
+- Copy paste the styled components.
+- Use a hook called useLocation() to get the data including state, pathname etc that has been sent from States.
+- useParam hook will get the coinId.
+https://reactrouter.com/en/main/hooks/use-params
+  - The useParams hook returns an object of key/value pairs of the dynamic params from the current URL that were matched by the <Route path>. Child routes inherit all params from their parent routes.
+
+- You can get the name of the coin and post it on the page before you grab details from the website. 
+- If you open in the incognito mode, if somebody comes directly to the page, there will be an error. There is no state. The state is created when you click on the one of the options from home. 
+- 
+
+# 5.5 Coin Data
+
+- Get data and paint detailed data on the screen. 
+- There are URLs that we need to hit to get detailed information. 
+- The data needs to be hit from the individual coin page. 
+- React Query
+- We can get the data and make it into json in one line. 
+```js
+async () => {
+      const infoData = await (
+        await fetch(`https://api.coinpaprika.com/v1/coins/${coinId}`)
+      ).json();
+```
+- first console out the data that you fetched and make sure that data is retrieved. 
+- Once you confirm that, you can create states that store those data. 
+- Usually, auto-complete will check the types in the API.
+- The annoying thing about typescript is that you have to explain every little thing.
