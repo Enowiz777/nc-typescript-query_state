@@ -180,3 +180,85 @@ async () => {
 - Once you confirm that, you can create states that store those data. 
 - Usually, auto-complete will check the types in the API.
 - The annoying thing about typescript is that you have to explain every little thing.
+
+# 5.6 Data Types
+
+- When you are using Typescript, you have to specify the types.
+*How do you get object type?*
+1. Console.log data fetched.
+2. Right-click and Store object as global variable.
+3. Data gets stored in temp1 and temp2.
+4. You can explain to Typescript the fast way. 
+
+- Create interfaces
+- People always name the interface with "I" in the beginning. 
+- Use below javascript code to extract all the keys
+```js
+Object.keys(temp1)
+```
+Result:
+```js
+(24) ['id', 'name', 'symbol', 'rank', 'is_new', 'is_active', 'type', 'logo', 'tags', 'team', 'description', 'message', 'open_source', 'started_at', 'development_status', 'hardware_wallet', 'proof_type', 'org_structure', 'hash_algorithm', 'links', 'links_extended', 'whitepaper', 'first_data_at', 'last_data_at']
+```
+- Since it is hard to remove comma from the list, you can do below:
+```js
+Object.keys(temp1).join()
+```
+Output:
+```js
+'id,name,symbol,rank,is_new,is_active,type,logo,tags,team,description,message,open_source,started_at,development_status,hardware_wallet,proof_type,org_structure,hash_algorithm,links,links_extended,whitepaper,first_data_at,last_data_at'
+```
+- select the comma and do CTRL-D to select all commas; then delete and press enter.
+- Then, in order to create cursor for all the selected lines, you can do SHIFT-ALT-I 
+- Do : ;
+- Now, get types by typing below:
+```
+Object.values(temp1)
+```
+Output:
+```
+(24) ['btc-bitcoin', 'Bitcoin', 'BTC', 1, false, true, 'coin', 'https://static.coinpaprika.com/coin/btc-bitcoin/logo.png', Array(7), Array(4), 'Bitcoin is a cryptocurrency and worldwide payment …s without a central bank or single administrator.', '', true, '2009-01-03T00:00:00Z', 'Working product', true, 'Proof of Work', 'Decentralized', 'SHA256', {…}, Array(14), {…}, '2010-07-17T00:00:00Z', '2022-12-30T03:50:00Z']
+```
+- What if you only want to get types only.
+```js
+Object.values(temp1).map(v => typeof v).join()
+```
+Output:
+```js
+'string,string,string,number,boolean,boolean,string,string,object,object,string,string,boolean,string,string,boolean,string,string,string,object,object,object,string,string'
+```
+
+- The problem is that some types are objects such as tags and teams.
+- If you also want to get type for them, you can do that by explaining to the TypeScript manually or if you don't need it you can delete it. 
+- After you are done getting the Interface now you can declare it in the state. 
+```js
+    const [info, setInfo] = useState<InfoData>({});
+```
+
+- You have to do the same for the PriceData
+```js
+    const [priceInfo, setPriceInfo] = useState<PriceData>();
+```
+
+# 5.7 Nested Routes pt.1
+
+- We are going to paint the coin screen.
+- Make sure you set Loading to false because it is always going to stay loading.
+- If you want to run the code only once, you have to put node dependency with nothing inside. (If you put the variable inside the )
+```js
+  useEffect(() => {
+    (async () => {
+      const response = await fetch("https://api.coinpaprika.com/v1/coins");
+      const json = await response.json();
+      setCoins(json.slice(0, 100));
+      setLoading(false);
+    })();
+  }, []);
+```
+- If you want to run the code only once, you have to use node dependency, []);
+- If you put the variable inside, when the variable changes, it will run again. 
+- Whatever you use inside the useEffect hook, you have to put it in the node dependency because when the data changes, useEffect will run again.
+- In this case, if we put the coinId, it will only run once because the route or the coinID will not change.
+- Nico actually painted the outside with below code. It is worthwhile to look at it. 
+- Nested route is route inside the route. 
+- It is useful when you have tabs within the pages. 
