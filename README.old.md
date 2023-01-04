@@ -262,3 +262,9 @@ Output:
 - Nico actually painted the outside with below code. It is worthwhile to look at it. 
 - Nested route is route inside the route. 
 - It is useful when you have tabs within the pages. 
+
+20221229
+The Lord told me to stop!!!!
+- The Lord does not want me to create a bitcoin related contents at all. 
+
+20220103

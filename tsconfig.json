@@ -22,5 +22,5 @@
   },
   "include": [
     "src"
-  ]
+, "archive/Router.tsx", "archive/routes"  ]
 }

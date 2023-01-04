@@ -1,8 +1,6 @@
 import { useEffect, useState } from "react";
 import { Switch, Route, useLocation, useParams } from "react-router";
 import styled from "styled-components";
-import Chart from "./Chart";
-import Price from "./Price";
 
 const Title = styled.h1`
   font-size: 48px;
